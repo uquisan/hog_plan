@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://baak8h0sqlj6e"]
+
+[ext_resource type="Script" path="res://scripts/npc_1.gd" id="1_h1udv"]
+[ext_resource type="Texture2D" uid="uid://8tnv15gstoio" path="res://icon.svg" id="1_mmj0o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_723ji"]
+
+[node name="NPC_1" type="CharacterBody2D" groups=["Npcs"]]
+script = ExtResource("1_h1udv")
+
+[node name="dialog_box" type="NinePatchRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="texto" type="RichTextLabel" parent="dialog_box"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -101.0
+offset_top = -93.0
+offset_right = 65.0
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+fit_content = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_mmj0o")
+
+[node name="colision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_723ji")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

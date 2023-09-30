@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyjk6tigr7qtf"]
+
+[ext_resource type="Texture2D" uid="uid://8tnv15gstoio" path="res://icon.svg" id="1_efh5w"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_hsjvf"]
+[ext_resource type="Script" path="res://scripts/hand.gd" id="3_3ic5r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_377vl"]
+size = Vector2(35, 34)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hj5g2"]
+radius = 31.0
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(256, 148)
+collision_layer = 2
+collision_mask = 101
+script = ExtResource("1_hsjvf")
+defesa = 50
+
+[node name="texture" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_efh5w")
+
+[node name="colision" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_377vl")
+
+[node name="hand" type="Node2D" parent="."]
+script = ExtResource("3_3ic5r")
+
+[node name="hurt_box" type="Area2D" parent="."]
+collision_layer = 6
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_box"]
+modulate = Color(0, 0.486275, 0.886275, 1)
+shape = SubResource("CircleShape2D_hj5g2")
+
+[connection signal="area_entered" from="hurt_box" to="." method="_on_entered"]

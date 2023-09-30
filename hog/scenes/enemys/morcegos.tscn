@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://brop20lllyixr"]
+
+[ext_resource type="Script" path="res://scripts/morcegos.gd" id="1_u530v"]
+[ext_resource type="Texture2D" uid="uid://8tnv15gstoio" path="res://icon.svg" id="1_xyq43"]
+[ext_resource type="Script" path="res://scripts/hit_box.gd" id="3_84w6d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g6s80"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lebyn"]
+radius = 16.0312
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hv6t8"]
+radius = 25.7099
+
+[node name="morcegos" type="CharacterBody2D"]
+script = ExtResource("1_u530v")
+
+[node name="texture" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_xyq43")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("CircleShape2D_g6s80")
+
+[node name="hit_box" type="Area2D" parent="."]
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("3_84w6d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_box"]
+modulate = Color(0.294118, 0, 0.196078, 1)
+shape = SubResource("CircleShape2D_lebyn")
+
+[node name="hurt_box" type="Area2D" parent="."]
+collision_layer = 6
+collision_mask = 6
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_box"]
+modulate = Color(0, 0.486275, 0.886275, 1)
+shape = SubResource("CircleShape2D_hv6t8")
